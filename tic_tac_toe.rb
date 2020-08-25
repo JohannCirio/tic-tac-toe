@@ -46,12 +46,30 @@ class Board
   def start_game
     puts "Let's play Tic Tac Toe!"
     set_players
-    current_player = 1
-    until winner? == true
+    current_turn_count = 1
+    until winner? || draw?(current_turn_count)
       print_board
-      current_player.odd? ? make_play(@first_player) : make_play(@second_player)
-      current_player += 1
+      current_turn_count.odd? ? make_play(@first_player) : make_play(@second_player)
+      current_turn_count += 1
     end
+    if winner?
+      (current_turn_count - 1).odd? ? game_over(@first_player) : game_over(@second_player)
+    end
+  end
+
+  def draw?(turn)
+    if turn == 10
+      print_board
+      puts "It's a draw! Better luck next time!"
+      return true
+    else
+      return false
+    end
+  end
+
+  def game_over(player)
+    print_board
+    puts "Congratulation #{player.name}, you won!"
   end
 
   def set_players
