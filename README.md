@@ -1,2 +1,2 @@
 # tic-tac-toe
-Tic Toe Toe Ruby Implementation for The Odin Project
+Tic Tac Toe Ruby implementation for The Odin Project
