@@ -29,10 +29,18 @@ class Board
   end
 
   def make_play(player)
-    puts "#{player.name}, enter the position of the board where you want to play:  "
-    play_position = @board_positions.key(gets.chomp.to_i)
+    play_position = 0
+    while play_position == 0
+      puts "#{player.name}, enter the position of the board where you want to play:  "
+      desired_position = gets.chomp.to_i
+      if @board_positions.has_value?(desired_position)
+        play_position = @board_positions.key(desired_position)
+      else
+        puts 'That is not a valid position!'
+      end
+    end
     change_position(play_position, player.token)
-    puts " "
+    puts ' '
   end
 
   def start_game
@@ -43,8 +51,6 @@ class Board
       print_board
       current_player.odd? ? make_play(@first_player) : make_play(@second_player)
       current_player += 1
-      if current_player == 10
-        draw
     end
   end
 
@@ -56,13 +62,6 @@ class Board
     puts ' '
   end
 
-  def draw
-    puts "It's a draw!"
-  end
-  def end_game
-    puts "Do you want to play another game?"
-  
-  end
 end
 
 class Player
